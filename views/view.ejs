@@ -36,7 +36,29 @@
             let pathName = location.pathname.split("/")[2]
             location.href = `/modify/${pathName}`
         }
-
+        
+        function comment_pasta() {
+            $.ajax({
+                type: "GET",
+                url: `/api/posts`,
+                data: {},
+                success: function (response) {
+                    //카테고리에 해당하는 goods를 가지고 온다.
+                    let posts = response["result"]
+                    for (let i = 0; i < posts.length; i++) {
+                        const comment = posts[i]['comment']
+                        make_post(comment)
+                    }
+                }
+            })
+        }
+        function comment_post(comment) {
+            let temp_html = `
+            <tr id="word-${_id}">
+                <td>${comment}</td>
+            </tr>`
+            $('#tbody-box').append(temp_html)
+        }
     </script>
     <style>
         .card {
@@ -92,7 +114,11 @@
                 <%= content %>
             </div>
         </div>
-
+        <tbody id="tbody-box">
+            <!-- Insert Table Rows-->
+                테스트임다.
+                
+        </tbody>
     </div>
 
 

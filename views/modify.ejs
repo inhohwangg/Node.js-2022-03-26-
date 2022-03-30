@@ -113,10 +113,12 @@
                     console.log(error.status);
                     console.log('hi');
                     if (!user) {
+                        console.log(_id)
                         alert('로그인 후 이용해주세요')
                         location.href = `/`
                         
                     } else if (error.status == 400) {
+                        console.log(_id)
                         alert('API 호출에 실패하였습니다.')
                     }
                 }
