@@ -28,7 +28,9 @@ router.post('/', async (req, res) => {
         res.send({ result: '게시글을 생성하였습니다.' })
     } catch (error) {
         console.log(`${req.method} ${req.originalUrl} : ${error.message}`)
-        res.status(400).send()
+        res.status(400).send({
+            errorMessage:"내용확인필요"
+        })
     }
 })
 

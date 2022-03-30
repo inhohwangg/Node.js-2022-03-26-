@@ -34,30 +34,44 @@
 
         function modify_post() {
             let pathName = location.pathname.split("/")[2]
+            console.log(pathName)
             location.href = `/modify/${pathName}`
         }
-        
-        function comment_pasta() {
-            $.ajax({
-                type: "GET",
-                url: `/api/posts`,
-                data: {},
-                success: function (response) {
-                    //카테고리에 해당하는 goods를 가지고 온다.
-                    let posts = response["result"]
-                    for (let i = 0; i < posts.length; i++) {
-                        const comment = posts[i]['comment']
-                        make_post(comment)
-                    }
-                }
-            })
+        function writeComment() {
+        const comment = $('#comment').val()
+        const postId = location.pathname.split("/")[2]
+
+        if (!comment) {
+            alert("댓글 내용을 입력 해주세요.")
+            return;
         }
-        function comment_post(comment) {
-            let temp_html = `
-            <tr id="word-${_id}">
-                <td>${comment}</td>
-            </tr>`
-            $('#tbody-box').append(temp_html)
+        $.ajax({
+            type: "POST",
+            url: `/api/comments/${postId}`,
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            data: {comment},
+            success: function (response) { //새로고침
+                location.href = location.href
+                history.go(0);
+            },
+            error: function (error) {
+                alert(error.responseJSON.errorMessage)
+            },
+        });
+    }
+
+        function loginCheck() {
+            if (!localStorage.getItem("token")) {
+                alert("로그인이 필요한 기능입니다.")
+                location.href = "/login"
+            }
+        }
+
+        function modifyPost() {
+            const postId = location.pathname.split("/")[2]
+            location.href = `/modify/${postId}`
         }
     </script>
     <style>
@@ -113,10 +127,13 @@
             <div style="padding:10px">
                 <%= content %>
             </div>
+            <textarea class="form-control" id="comment" rows="3" onclick="loginCheck()"></textarea>
+        </div>
+        <div>
+            <button id="comment" class="btn btn-sparta btn-lg" onclick="loginCheck()">댓글 달기</button>
         </div>
         <tbody id="tbody-box">
             <!-- Insert Table Rows-->
-                테스트임다.
                 
         </tbody>
     </div>

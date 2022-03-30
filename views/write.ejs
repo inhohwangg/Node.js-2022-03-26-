@@ -43,7 +43,7 @@
             $.ajax({
                 type: "POST",
                 url: '/api/posts',
-                data: {title, user, password, content,comment},
+                data: {title, user, password, content, comment},
                 success: (response) => {
                     alert(response.result);
                     location.href = "/";
@@ -56,33 +56,33 @@
             })
 
         }
-        $(document).ready(function () {
+        // $(document).ready(function () {
 
-        })
+        // })
 
-        function write_post() {
-            const title = $('#title').val();
-            const user = $('#user').val();
-            const password = $('#password').val();
-            const content = $('#content').val();
-            const comment = $('#comment').val();
-            console.log(title, user, password, content,comment);
-            $.ajax({
-                type: "POST",
-                url: '/api/posts',
-                data: {title, user, password, content,comment},
-                success: (response) => {
-                    alert(response.result);
-                    location.href = "/";
-                },
-                error: function (error) {
-                    console.error(error);
-                    // alert('패스워드가 일치하지 않습니다.')
-                    // location.href = '/'
-                },
-            })
+        // function write_post() {
+        //     const title = $('#title').val();
+        //     const user = $('#email').val();
+        //     const password = $('#password').val();
+        //     const content = $('#content').val();
+        //     const comment = $('#comment').val();
+        //     console.log(title, email, password, content,comment);
+        //     $.ajax({
+        //         type: "POST",
+        //         url: '/api/posts',
+        //         data: {title, email, password, content,comment},
+        //         success: (response) => {
+        //             alert(response.result);
+        //             location.href = "/";
+        //         },
+        //         error: function (error) {
+        //             console.error(error);
+        //             // alert('패스워드가 일치하지 않습니다.')
+        //             // location.href = '/'
+        //         },
+        //     })
 
-        }
+        // }
     </script>
     <style>
         .card {

@@ -13,7 +13,7 @@ router.get('/:_id', async (req, res) => {
             user: isExist['user'],
             title: isExist['title'],
             content: isExist['content'],
-            content: isExist['comment'],
+            comment: isExist['comment'],
             createdAt: isExist['createdAt'],
         }
         res.render('view', result) //view라는 ejs파일을 렌더링해라

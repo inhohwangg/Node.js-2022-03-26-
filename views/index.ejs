@@ -29,6 +29,20 @@
     <link href="/static/mystyle.css" rel="stylesheet">
     <title>황인호 블로그</title>
     <script>
+        $(document).ready(function() {
+            //토큰이 있을 경우 로그인 기능 hide
+            if (localStorage.getItem("token")) {
+                getSelf(function() {
+                    $('#btn_login').hide()
+                    $('#btn_logout').show()
+                })
+            } else {
+                //토큰이 없을 경우 게시글 작성 hide
+                $('#btn_post').hide()
+            }
+            getPosts()
+        })
+
         // Html 파일이 전부 로딩되었을 경우 실행
         $(document).ready(function () {
             get_posts()
@@ -79,6 +93,29 @@
             alert('로그아웃 완료되었습니다.')
             window.location.href = '/login'
         }
+        function redirectSign() {
+        location.href = "sign";
+        }
+
+        function redirectWrite() {
+            location.href = "/write"
+        }
+
+        function redirectLogin() {
+            location.href = "/login"
+        }
+
+        function logout() {
+            if (confirm('정말로그아웃하시겠습니까?')) {
+            // confirm은 [예 / 아니오]를 물어보는 내장 함수
+                localStorage.clear();
+            alert('로그아웃 완료되었습니다.')
+            window.location.href = '/login';
+            }else {
+                window.location.href = '/';
+            }
+            
+        }
     </script>
     <style>
         .card {
@@ -102,8 +139,8 @@
             aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="navbar-collapse collapse flex-grow-0 ml-auto" id="navbarSupportedContent" style="">
         <ul class="navbar-nav mr-auto text-right">
-            <li class="nav-item" id="link-cart">
-                <a class="nav-link" href="/write">
+            <li class="nav-item" id="btn_post">
+                <a class="nav-link" onclick="redirectWrite()">
                     게시글 작성
                 </a>
             </li>
@@ -115,13 +152,13 @@
             aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="navbar-collapse collapse flex-grow-0 ml-auto" id="navbarSupportedContent" style="">
         <ul class="navbar-nav mr-auto text-right">
-            <li class="nav-item" id="link-cart">
-                <a class="nav-link" href="/login">
-                    로그인 하기
+            <li class="nav-item" id="btn_login">
+                <a  class="nav-link" onclick="redirectLogin()">
+                    로그인
                 </a>
             </li>
-            <li class="nav-item" id="link-cart">
-                <a class="nav-link" onclick="signOut()">
+            <li class="nav-item" id="btn_logout">
+                <a  class="nav-link" onclick="logout()">
                     로그아웃 하기
                 </a>
             </li>
