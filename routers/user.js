@@ -84,7 +84,9 @@ router.post('/auth', async (req, res) => {
 router.get('/user/me', authMiddleware, async (req, res) => { //토큰으로 정상적으로 로그인이 되었는지 확인하는 코드
     // 토큰으로 로그인이 되어있는 상태에서 재로그인시 hi뜸
     const { user } = res.locals
-    console.log("hi")
+    console.log('hi')
+    console.log(user)
+    
     res.send({
         user: {
             user,

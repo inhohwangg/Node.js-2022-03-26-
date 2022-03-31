@@ -202,7 +202,7 @@
             console.log(response)
             localStorage.setItem("token", response.token);
             localStorage.setItem("email", email);
-            // window.location.replace("/");
+            window.location.replace("/");
           },
           error: function (error) {
             customAlert(error.responseJSON.errorMessage);
